@@ -27,9 +27,27 @@
   flex-wrap: wrap;
 }
 
-@@media (min-width: 560px;) {
+#mudaLayout {
+  display: none;
+}
+
+.mural--linhas {
+  flex-direction: column;
+}
+
+.mural--linhas .cartao {
+  flex-basis: auto;
+  width: auto;
+  display: block;
+}
+
+@media (min-width: 560px) {
   .cartao {
     width: 190px;
+    display: inline-block;
+  }
+
+  #mudaLayout {
     display: inline-block;
   }
 }
