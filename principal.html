@@ -7,7 +7,8 @@
     <link rel="stylesheet" href="/cabecalho.css">
     <link rel="stylesheet" href="/opcoesDaPagina.css">
     <link rel="stylesheet" href="/cartao.css">
-      <link rel="stylesheet" href="/opcoesDoCartao.css">
+    <link rel="stylesheet" href="/opcoesDoCartao.css">
+    <link rel="stylesheet" href="/novoCartao.css">
     <title>Ceep - Home</title>
   </head>
   <body>
@@ -17,6 +18,13 @@
         <button id="mudaLayout" class="opcoesDaPagina-opcao opcoesDaPagina-botao">Linhas</button>
       </div>
     </header>
+
+    <form action="" class="novoCartao container">
+      <textarea name="novoCartao-conteudo" class="novoCartao-conteudo"
+        placeholder="Digite aqui..."></textarea>
+      <input class="novoCartao-salvar" type="submit" value="Salvar">
+    </form>
+
     <section class="container mural">
       <div class="cartao" id="cartao_1">
         <div class="opcoesDoCartao">
@@ -50,6 +58,7 @@
       </div>
     </section>
 
+  <script src="jquery.js"></script>
   <script src="principal.js"></script>
   </body>
 </html>
