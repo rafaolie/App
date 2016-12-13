@@ -40,3 +40,12 @@
 	padding: .35em 1em;
 	background: rgba(70,20,170,.25);
 }
+
+
+.error {
+	color: red;
+}
+
+.container {
+	text-align: center;
+}

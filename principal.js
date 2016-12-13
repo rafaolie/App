@@ -110,3 +110,107 @@ function decideTipoDeCartao(conteudo) {
 
   return tipoCartao;
 }
+
+/* BUSCA*/
+
+$("#busca").on("input", function () {
+  let busca = $(this).val().trim();
+
+  if(busca.length) {
+    $(".cartao").hide().filter(function() {
+      return $(this).find(".cartao-conteudo")
+                    .text()
+                    .match(new RegExp(busca, "i"));
+    }).show();
+  }else {
+    $(".cartao").show();
+  }
+});
+
+/*HELP*/
+
+$("#ajuda").click(function(){
+  $.getJSON("https://ceep.herokuapp.com/cartoes/instrucoes",
+    function (res){
+      res.instrucoes.forEach(function(instrucao){
+        adicionaCartao(instrucao.conteudo, instrucao.cor);
+      });
+    });
+});
+
+function adicionaCartao(conteudo, cor) {
+  contador++;
+
+  var botaoRemove = $("<button>").addClass("opcoesDoCartao-remove")
+                                 .addClass("opcoesDoCartao-opcao")
+                                 .attr("data-ref", contador)
+                                 .text("Remover")
+                                 .click(removeCartao);
+
+  var opcoes = $("<div>").addClass("opcoesDoCartao")
+                         .append(botaoRemove);
+
+  var tipoCartao = decideTipoDeCartao(conteudo);
+
+  var conteudoTag = $("<p>").addClass("cartao-conteudo")
+                            .append(conteudo);
+
+  $("<div>").attr("id", "cartao_" + contador)
+            .addClass("cartao")
+            .addClass(tipoCartao)
+            .append(opcoes)
+            .append(conteudoTag)
+            .css("background-color", cor)
+            .appendTo(".mural");
+}
+
+/*ENVIO DE DADOS AO SERVIDOR*/
+$("#sync").click(function() {
+  $("#sync").removeClass("botaoSync--sincronizado");
+  $("#sync").addClass("botaoSync--esperando");
+
+  var cartoes = [];
+
+  $(".cartao").each(function() {
+    var cartao = {};
+    cartao.conteudo = $(this).find(".cartao-conteudo").html();
+    cartoes.push(cartao);
+  })
+
+  var mural = {
+    usuario: usuario
+    ,cartoes: cartoes
+  }
+
+  $.ajax({
+    url: "https://ceep.herokuapp.com/cartoes/salvar"
+    ,method: "POST"
+    ,data: mural
+    ,success: function(res){
+      $("#sync").addClass("botaoSync--sincronizado")
+      console.log(res.quantidade + " cartões salvos em " + res.usuario);
+    }
+    ,error: function() {
+      $("#sync").addClass("botaoSync--deuRuim");
+      console.log("Não foi possível salvar o mural");
+    }
+    ,complete: function() {
+      $("#sync").removeClass("botaoSync--esperando")
+    }
+  });
+});
+
+/*CARREGA MURAL*/
+var usuario = "seu.email@exemplo.com.br"
+
+$.getJSON(
+  "https://ceep.herokuapp.com/cartoes/carregar?callback=?",
+  {usuario: usuario},
+  function(res){
+    var cartoes = res.cartoes;
+    console.log(cartoes.lenght + " carregados em " + res.usuario);
+    cartoes.forEach(function(cartao) {
+      adicionaCartao(cartao.conteudo);
+    });
+  }
+);
