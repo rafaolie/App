@@ -1,5 +1,6 @@
 (function() {
   /*CARREGA MURAL*/
+  "use strict";
   var usuario = "seu.email@exemplo.com.br"
 
   $.getJSON(
@@ -53,4 +54,4 @@
       }
     });
   });
-}) ();
+})(controladorDeCartoes);

@@ -1,4 +1,5 @@
 (function() {
+  "use strict";
   var $novoCartaoConteudo = document.querySelector(".novoCartao-conteudo");
   var $novoCartao = document.querySelector(".novoCartao");
 
@@ -38,4 +39,4 @@
   });
 
 
-})();
+})(controladorDeCartoes);

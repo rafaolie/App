@@ -1,6 +1,7 @@
 (function() {
   /* BUSCA*/
-
+  "use strict";
+  
   $("#busca").on("input", function () {
     let busca = $(this).val().trim();
 

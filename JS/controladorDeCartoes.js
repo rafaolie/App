@@ -1,4 +1,5 @@
 var controladorDeCartoes = (function() {
+  "use strict";
   var $novoCartaoConteudo = document.querySelector(".novoCartao-conteudo");
   var $novoCartao = document.querySelector(".novoCartao");
   var botoes = document.querySelectorAll(".opcoesDoCartao-remove");
