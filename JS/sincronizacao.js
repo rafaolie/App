@@ -9,7 +9,7 @@
       var cartoes = res.cartoes;
       console.log(cartoes.lenght + " carregados em " + res.usuario);
       cartoes.forEach(function(cartao) {
-        adicionaCartao(cartao.conteudo);
+        controladorDeCartoes.adicionaCartao(cartao.conteudo);
       });
     }
   );
@@ -38,7 +38,11 @@
       ,data: mural
       ,success: function(res){
         $("#sync").addClass("botaoSync--sincronizado")
-        console.log(res.quantidade + " cartões salvos em " + res.usuario);
+        console.log(res.quantidade + " cartões salvos em " + usuario);
+
+        var quantidadeRemovidos = controladorDeCartoes.idUltimoCartao() - res.quantidade
+
+        console.log(quantidadeRemovidos + "cartoes removidos");
       }
       ,error: function() {
         $("#sync").addClass("botaoSync--deuRuim");

@@ -30,7 +30,7 @@
                                 .replace(/\n/g, "<br>");
 
     if (conteudo) {
-      adicionaCartao(conteudo)
+      controladorDeCartoes.adicionaCartao(conteudo)
     }
 
     campoConteudo.val("");
