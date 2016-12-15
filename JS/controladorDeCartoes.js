@@ -61,14 +61,8 @@ var controladorDeCartoes = (function() {
   function adicionaCartao(conteudo, cor) {
     contador++;
 
-    var botaoRemove = $("<button>").addClass("opcoesDoCartao-remove")
-                                   .addClass("opcoesDoCartao-opcao")
-                                   .attr("data-ref", contador)
-                                   .text("Remover")
-                                   .click(removeCartao);
 
-    var opcoes = $("<div>").addClass("opcoesDoCartao")
-                           .append(botaoRemove);
+    var opcoes = criaOpcoesDoCartao(contador);
 
     var tipoCartao = decideTipoDeCartao(conteudo);
 
@@ -76,6 +70,7 @@ var controladorDeCartoes = (function() {
                               .append(conteudo);
 
     $("<div>").attr("id", "cartao_" + contador)
+              .attr("tabindex", 0)
               .addClass("cartao")
               .addClass(tipoCartao)
               .append(opcoes)

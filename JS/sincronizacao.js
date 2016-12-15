@@ -16,7 +16,7 @@
   );
 
   /*ENVIO DE DADOS AO SERVIDOR*/
-  $("#sync").on("precisaSincronizar", function() {
+  $(document).on("precisaSincronizar", function() {
     $("#sync").removeClass("botaoSync--sincronizado");
     $("#sync").addClass("botaoSync--esperando");
   });
@@ -44,9 +44,7 @@
         $("#sync").addClass("botaoSync--sincronizado")
         console.log(res.quantidade + " cartões salvos em " + usuario);
 
-        var quantidadeRemovidos = controladorDeCartoes.idUltimoCartao() - res.quantidade
-
-        console.log(quantidadeRemovidos + "cartoes removidos");
+        var quantidadeRemovidos = controladorDeCartoes.idUltimoCartao() - res.quantidade;
       }
       ,error: function() {
         $("#sync").addClass("botaoSync--deuRuim");
