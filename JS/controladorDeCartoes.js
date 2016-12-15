@@ -11,6 +11,7 @@ var controladorDeCartoes = (function() {
 
     setTimeout(function() {
       cartao.remove();
+      $(document).trigger("precisaSincronizar");
     },400);
   }
 

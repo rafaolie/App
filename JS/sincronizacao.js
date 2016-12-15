@@ -16,9 +16,12 @@
   );
 
   /*ENVIO DE DADOS AO SERVIDOR*/
-  $("#sync").click(function() {
+  $("#sync").on("precisaSincronizar", function() {
     $("#sync").removeClass("botaoSync--sincronizado");
     $("#sync").addClass("botaoSync--esperando");
+  });
+
+  $(document).on("precisaSincronizar", function() {
 
     var cartoes = [];
 
@@ -54,4 +57,9 @@
       }
     });
   });
+
+  $("#sync").click(function() {
+    $(document).trigger("precisaSincronizar");
+  });
+
 })(controladorDeCartoes);

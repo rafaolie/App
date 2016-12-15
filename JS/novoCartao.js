@@ -1,5 +1,6 @@
-(function() {
+(function(controlador) {
   "use strict";
+
   var $novoCartaoConteudo = document.querySelector(".novoCartao-conteudo");
   var $novoCartao = document.querySelector(".novoCartao");
 
@@ -31,7 +32,8 @@
                                 .replace(/\n/g, "<br>");
 
     if (conteudo) {
-      controladorDeCartoes.adicionaCartao(conteudo)
+      controlador.adicionaCartao(conteudo);
+      $(document).trigger("precisaSincronizar");
     }
 
     campoConteudo.val("");
